@@ -44,8 +44,22 @@ const getSummaryProfile = async (type, id, component) => {
     return resp;
 }
 
+const getPublicMilestones = async () => {
+    const path = `/Destiny2/Milestones`
+    const params = {
+        headers: {
+            'X-API-KEY': apiKey
+        },
+    };
+
+    const resp = await axios.get(path, params);
+
+    return resp;
+}
+
 export {
     searchUser,
     getMembershipDataById,
-    getSummaryProfile
+    getSummaryProfile,
+    getPublicMilestones
 }
