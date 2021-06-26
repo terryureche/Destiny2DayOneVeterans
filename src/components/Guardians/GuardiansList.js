@@ -6,6 +6,7 @@ import GuardinProfileConstants from './../../utils/DestinyEnums/GuardinProfileEn
 
 const MembershipData = ({primaryMembership}) => {
     const [characters, setCharacters] = useState([]);
+    const [isExpanded, setIsExpanded] = useState([]);
 
     const getProfileDetails = async () => {
         const {id, type} = primaryMembership;
@@ -32,6 +33,10 @@ const MembershipData = ({primaryMembership}) => {
         return characters.map((item, key) => RenderListContent(item, key));
     }
 
+    const setExpaned = (item) => {
+        return true;
+    }
+
     const generateHeaderContent = (item, key) => {
         const backgroundUri = GuardinProfileConstants.urls.bungi + item.emblemBackgroundPath;
         const race = GuardinProfileConstants.race[item.raceType];
@@ -39,7 +44,9 @@ const MembershipData = ({primaryMembership}) => {
         const gender = GuardinProfileConstants.gender[item.genderType];
         const light = '✦' + item.light;
         const characterLvl = 'Level ' + item.baseCharacterLevel;
-        console.log(item);
+
+        debugger;
+
         return <View style={{width: "100%"}}>
             <ImageBackground source={{uri: backgroundUri}} style={{width: "100%", height: 70}}>
                 <ListItem.Content style={{flex: 1}}>
@@ -59,8 +66,8 @@ const MembershipData = ({primaryMembership}) => {
         </View>
     }
 
-    const generateStateDetail = (iconUrl, name, value) => {
-        return <View style={styles.bodyDetail}>
+    const generateStateDetail = (iconUrl, name, value, index) => {
+        return <View key={index} style={styles.bodyDetail}>
             <Text style={{color: 'white'}}>{value}</Text>
             <Avatar source={{uri: iconUrl}} />
         </View>
@@ -76,25 +83,24 @@ const MembershipData = ({primaryMembership}) => {
             const iconUrl = GuardinProfileConstants.stats[statId].icon;
             const name = GuardinProfileConstants.stats[statId].name;
 
-            return generateStateDetail(iconUrl, name, statValue);
+            return generateStateDetail(iconUrl, name, statValue, index);
         })
     }
 
     const generateBodyContent = (item, key) => {
-        debugger;
         return <View style={[styles.mainHeader, {backgroundColor: 'gray', justifyContent: 'center'}]}>
             {generateStats(item)}
         </View>
     }
 
     const RenderListContent = (item, key) => {
-
         return (
             <ListItem.Accordion
+                key={key}
                 content={
                     generateHeaderContent(item, key)
                 }
-                isExpanded={key === 0}
+                isExpanded={true}
             >
                 {generateBodyContent(item, key)}
             </ListItem.Accordion>
