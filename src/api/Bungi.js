@@ -2,7 +2,7 @@ import axios from "./../utils/api/axios";
 import apiKey from './../../key';
 
 const searchUser = async (data) => {
-    const path = '/User/SearchUsers/';
+    const path = '/Platform/User/SearchUsers/';
     const params = {
         headers: {
             'X-API-KEY': apiKey
@@ -18,7 +18,7 @@ const searchUser = async (data) => {
 }
 
 const getMembershipDataById = async (userId) => {
-    const path = `/User/GetMembershipsById/${userId}/-1`;
+    const path = `/Platform/User/GetMembershipsById/${userId}/-1`;
 
     const params = {
         headers: {
@@ -32,7 +32,7 @@ const getMembershipDataById = async (userId) => {
 }
 
 const getSummaryProfile = async (type, id, component) => {
-    const path = `/Destiny2/${type}/Profile/${id}/?components=${component}`;
+    const path = `/Platform/Destiny2/${type}/Profile/${id}/?components=${component}`;
     const params = {
         headers: {
             'X-API-KEY': apiKey
@@ -45,7 +45,7 @@ const getSummaryProfile = async (type, id, component) => {
 }
 
 const getPublicMilestones = async () => {
-    const path = `/Destiny2/Milestones`
+    const path = `/Platform/Destiny2/Milestones`;
     const params = {
         headers: {
             'X-API-KEY': apiKey
@@ -57,9 +57,36 @@ const getPublicMilestones = async () => {
     return resp;
 }
 
+const getManifest = async () => {
+    const path = `/Platform/Destiny2/Manifest`;
+    const params = {
+        headers: {
+            'X-API-KEY': apiKey
+        }
+    }
+
+    const resp = await axios.get(path, params);
+
+    return resp;
+}
+
+const basicBungieGet = async (path) => {
+    const params = {
+        headers: {
+            'X-API-KEY': apiKey
+        }
+    }
+
+    const resp = await axios.get(path, params);
+
+    return resp;
+}
+
 export {
     searchUser,
     getMembershipDataById,
     getSummaryProfile,
-    getPublicMilestones
+    getPublicMilestones,
+    getManifest,
+    basicBungieGet
 }
