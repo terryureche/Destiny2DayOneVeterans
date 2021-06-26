@@ -16,6 +16,14 @@ export default {
         1: 'Female',
         2: 'Unknown'
     },
+    milestone: {
+        0: 'Unknown',
+        1: 'Tutorial',
+        2: 'OneTime',
+        3: 'Weekly',
+        4: 'Daily',
+        5: 'Special'
+    },
     urls: {
         bungi: 'https://www.bungie.net'
     },
