@@ -4,6 +4,8 @@ import {BottomSheet, ListItem, Button, Avatar, Icon, getIconType} from 'react-na
 import {getMembershipDataById, getSummaryProfile} from './../../api/Bungi';
 // import {Context as ProfileContext} from './../../context/ProfileContext';
 import Guardians from './../../components/Guardians/GuardiansList';
+import PublicMilestones from '../../components/Milestones/PublicMilestones';
+import Loading from '../../components/Utils/Loading/Loading';
 
 const DetailScreen = ({route, navigation}) => {
     const [primaryMembership, setPrimaryMembership] = useState({});
@@ -91,12 +93,12 @@ const DetailScreen = ({route, navigation}) => {
 
     return (
         <View>
-            <Button
+            {/* <Button
                 onPress={() => {
                     setIsVisible(true)
                 }}
                 title="Select Platform"
-            />
+            /> */}
             <BottomSheet
                 isVisible={isVisible}
                 containerStyle={{backgroundColor: 'rgba(0.5, 0.25, 0, 0.2)'}}
@@ -114,6 +116,7 @@ const DetailScreen = ({route, navigation}) => {
             </BottomSheet>
             <ScrollView>
                 <Guardians membershipUsersList={membershipUsersList} primaryMembership={primaryMembership} />
+                <PublicMilestones />
             </ScrollView>
         </View >
     );
